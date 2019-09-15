@@ -1,9 +1,13 @@
-# PowerDNS Ansible playbook
+# PowerDNS Ansible Playbook
 
 Work in progress  
-Change variables-example.yml to variables.yml before use. Also change passwords :)
 
-Currently using a custom hacked role for pdns (https://github.com/PowerDNS/pdns-ansible/pull/61)  
+This will setup MariaDB and PowerDNS 4.2. Using PowerDNS-Admin for webinterface. No bootstrapping done yet.  
+First user created in PowerDNS-Admin is full admin.
+
+Change variables-example.yml to variables.yml before use. Change passwords before use :)  
+
+Using this PR https://github.com/PowerDNS/pdns-ansible/pull/61 to get PDNS 4.2
 
 ```
 cp variables-example.yml variables.yml

@@ -33,7 +33,7 @@
           - "localhost"
     pdns_install_repo: "{{ pdns_auth_powerdns_repo_42 }}"
   tasks:
-  - name: Clean artifact path
+  - name: Remove named.conf
     file:
       state: absent
       path: "/etc/powerdns/named.conf"

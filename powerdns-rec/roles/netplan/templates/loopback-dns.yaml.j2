@@ -1,0 +1,20 @@
+{% if loopback_ipv4_dns1 is defined || loopback_ipv6_dns1 is defined %}
+network:
+  ethernets:
+    lo:
+      addresses:
+{% if loopback_ipv4_dns1 is defined  %}
+      - {{ loopback_ipv4_dns1 }}
+{% endif %}
+{% if loopback_ipv6_dns1 is defined  %}
+      - {{ loopback_ipv6_dns1 }}
+{% endif %}
+{% if loopback_ipv4_dns2 is defined  %}
+      - {{ loopback_ipv4_dns2 }}
+{% endif %}
+{% if loopback_ipv6_dns2 is defined  %}
+      - {{ loopback_ipv6_dns2 }}
+{% endif %}
+{% else %}
+# No loopback address defined
+{% endif %}

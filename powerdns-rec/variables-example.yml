@@ -1,0 +1,6 @@
+---
+  loopback_ipv4_dns1: 213.184.213.10 # Anycast
+  loopback_ipv4_dns2: 213.184.213.15 # Static
+  loopback_ipv6_dns1: 2a0b:5102:0:240::10 # Anycast
+  loopback_ipv6_dns2: 2a0b:5102:0:240::15 # Static
+  pdns_api_key: Gmw37bQVR7b5LtGCtgFuLHNk

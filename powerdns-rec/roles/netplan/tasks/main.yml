@@ -1,0 +1,6 @@
+---
+- name: Template loopback dns netplan file
+  template:
+    src: loopback-dns.yaml.j2
+    dest: /etc/netplan/loopback-dns.yaml
+  notify: netplan_apply

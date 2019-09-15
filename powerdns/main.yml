@@ -15,7 +15,7 @@
       master: true
       slave: true
       local-address: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
-      #local-ipv6: "{{ hostvars[inventory_hostname]['ansible_default_ipv6']['address'] }}"
+      local-ipv6: "{{ hostvars[inventory_hostname]['ansible_default_ipv6']['address'] }}"
       api: true
       api-key: "{{ pdns_api_key }}"
     pdns_backends:

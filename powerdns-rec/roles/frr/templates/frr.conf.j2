@@ -6,17 +6,12 @@ no ip forwarding
 no ipv6 forwarding
 service integrated-vtysh-config
 !
-interface eth0
- ip ospf authentication message-digest
- ip ospf message-digest-key 5 md5 RsWUjBjV
-!
 router ospf
  ospf router-id {{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}
 {% if loopback_ipv4_dns1 is defined  %}
  network {{ loopback_ipv4_dns1 }} area 0.0.0.0
 {% endif %}
  network {{ hostvars[inventory_hostname]['ansible_default_ipv4']['network'] }} area 0.0.0.0
- area 0.0.0.0 authentication message-digest
 !
 router ospf6
  ospf6 router-id {{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}

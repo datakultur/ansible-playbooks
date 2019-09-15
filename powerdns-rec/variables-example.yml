@@ -3,4 +3,14 @@
   loopback_ipv4_dns2: 213.184.213.15/32 # Static
   loopback_ipv6_dns1: 2a0b:5102:0:240::10/128 # Anycast
   loopback_ipv6_dns2: 2a0b:5102:0:240::15/128 # Static
-  pdns_api_key: Gmw37bQVR7b5LtGCtgFuLHNk
+  allow_from:
+    - 213.184.213.0/24
+    - 213.184.214.0/23
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 2a0b:5102:0:200::/56
+  local_address:
+    - 213.184.213.10
+    - 213.184.213.15
+    - 2a0b:5102:0:240::10
+    - 2a0b:5102:0:240::15

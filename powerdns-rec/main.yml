@@ -2,13 +2,24 @@
 - hosts: all
   roles:
     - netplan
-    - frr
   vars_files:
     - variables.yml
 
 - hosts: all
   roles:
-  - { role: PowerDNS.pdns_recursor,
-    pdns_rec_install_repo: "{{ pdns_rec_powerdns_repo_42 }}" }
+    - { role: pdns_recursor-ansible }
+  vars:
+   pdns_rec_config:
+     allow-from: "{{ allow_from }}"
+     local-address: "{{ local_address }}"
+     query-local-address: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
+     query-local-address6: "{{ hostvars[inventory_hostname]['ansible_default_ipv6']['address'] }}"
+   pdns_rec_install_repo: "{{ pdns_rec_powerdns_repo_42 }}"
+  vars_files:
+    - variables.yml
+
+- hosts: all
+  roles:
+    - frr
   vars_files:
     - variables.yml

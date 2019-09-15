@@ -1,0 +1,5 @@
+# from galaxy
+#- src: powerdns.pdns_recursor
+
+# from github
+- src: https://github.com/olemathias/pdns_recursor-ansible.git

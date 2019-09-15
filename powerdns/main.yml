@@ -1,0 +1,45 @@
+---
+- hosts: all
+  roles:
+    - mariadb
+  vars_files:
+    - variables.yml
+
+- hosts: master
+  vars_files:
+    - variables.yml
+  roles:
+    - { role: powerdns.pdns }
+  vars:
+    pdns_config:
+      master: true
+      slave: true
+      local-address: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
+      #local-ipv6: "{{ hostvars[inventory_hostname]['ansible_default_ipv6']['address'] }}"
+      api: true
+      api-key: "{{ pdns_api_key }}"
+    pdns_backends:
+      gmysql:
+        host: localhost
+        port: 3306
+        user: powerdns
+        password: "{{ sql_pdns_password }}"
+        dbname: pdns
+    pdns_mysql_databases_credentials:
+      gmysql:
+        priv_user: root
+        priv_password: "{{ mysql_root_password }}"
+        priv_host:
+          - "localhost"
+    pdns_install_repo: "{{ pdns_auth_powerdns_repo_42 }}"
+  tasks:
+  - name: Clean artifact path
+    file:
+      state: absent
+      path: "/etc/powerdns/named.conf"
+
+- hosts: master
+  roles:
+    - powerdnsadmin
+  vars_files:
+    - variables.yml

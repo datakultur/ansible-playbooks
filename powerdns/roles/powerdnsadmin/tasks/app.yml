@@ -1,0 +1,89 @@
+---
+- name: Install required packages for PDA
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - python3-dev
+    - libmysqlclient-dev
+    - libsasl2-dev
+    - libldap2-dev
+    - libssl-dev
+    - libxml2-dev
+    - libxslt1-dev
+    - libxmlsec1-dev
+    - libffi-dev
+    - pkg-config
+    - apt-transport-https
+    - virtualenv
+    - build-essential
+
+- name: Install gpg key for nodejs LTS
+  apt_key:
+    url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+    state: present
+
+- name: Install nodejs LTS repos
+  apt_repository:
+    repo: "deb https://deb.nodesource.com/node_10.x bionic main"
+    state: present
+    update_cache: yes
+
+- name: Install nodejs
+  apt:
+    name: nodejs
+    state: present
+
+- name: Configure the Yarn APT key
+  apt_key:
+    url: https://dl.yarnpkg.com/debian/pubkey.gpg
+
+- name: Add Yarn repository
+  apt_repository:
+    repo: 'deb https://dl.yarnpkg.com/debian/ stable main'
+    state: present
+    update_cache: yes
+
+- name: Install Yarn
+  apt:
+    name: yarn
+    state: present
+
+- name: Clone powerdns-admin repo
+  git:
+    repo: 'https://github.com/ngoduykhanh/PowerDNS-Admin.git'
+    dest: /opt/web/powerdns-admin
+
+- name: Template config file
+  template:
+    src: config.py.j2
+    dest: /opt/web/powerdns-admin/config.py
+
+- name: Install requirements
+  pip:
+    requirements: /opt/web/powerdns-admin/requirements.txt
+    virtualenv: /opt/web/powerdns-admin/flask
+    virtualenv_python: python3.6
+
+- name: Run db upgrade
+  shell: FLASK_APP=app/__init__.py /opt/web/powerdns-admin/flask/bin/flask db upgrade
+  args:
+    chdir: /opt/web/powerdns-admin/
+
+- name: Run yarn install
+  shell: yarn install --pure-lockfile
+  args:
+    chdir: /opt/web/powerdns-admin/
+
+- name: Assets build
+  shell: FLASK_APP=app/__init__.py /opt/web/powerdns-admin/flask/bin/flask assets build
+  args:
+    chdir: /opt/web/powerdns-admin/
+
+- name: Change permissions on /opt/web/powerdns-admin/
+  file:
+    path: /opt/web/powerdns-admin
+    state: directory
+    recurse: yes
+    owner: pdns
+    group: pdns

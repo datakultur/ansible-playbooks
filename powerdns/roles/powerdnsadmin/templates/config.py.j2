@@ -1,0 +1,32 @@
+import os
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+# BASIC APP CONFIG
+SECRET_KEY = '{{ pda_secret_key }}'
+BIND_ADDRESS = '127.0.0.1'
+PORT = 9191
+
+# TIMEOUT - for large zones
+TIMEOUT = 10
+
+# LOG CONFIG
+LOG_LEVEL = 'DEBUG'
+LOG_FILE = 'logfile.log'
+SALT = '{{ pda_salt }}'
+
+# UPLOAD DIRECTORY
+UPLOAD_DIR = os.path.join(basedir, 'upload')
+
+# DATABASE CONFIG
+SQLA_DB_USER = 'pda'
+SQLA_DB_PASSWORD = '{{ pda_db_password }}'
+SQLA_DB_HOST = '127.0.0.1'
+SQLA_DB_PORT = 3306
+SQLA_DB_NAME = 'pda'
+SQLALCHEMY_TRACK_MODIFICATIONS = True
+
+# DATABASE - MySQL
+SQLALCHEMY_DATABASE_URI = 'mysql://'+SQLA_DB_USER+':'+SQLA_DB_PASSWORD+'@'+SQLA_DB_HOST+':'+str(SQLA_DB_PORT)+'/'+SQLA_DB_NAME
+
+# SAML Authentication
+SAML_ENABLED = False

@@ -1,0 +1,36 @@
+---
+- name: Template powerdns-admin.service
+  template:
+    src: powerdns-admin.service.j2
+    dest: /etc/systemd/system/powerdns-admin.service
+  notify: daemon_reload
+
+- name: Template powerdns-admin.socket
+  template:
+    src: powerdns-admin.socket.j2
+    dest: /etc/systemd/system/powerdns-admin.socket
+  notify: daemon_reload
+
+- name: Template powerdns-admin.conf
+  template:
+    src: powerdns-admin.conf.j2
+    dest: /etc/tmpfiles.d/powerdns-admin.conf
+  notify: daemon_reload
+
+- name: Create /run/powerdns-admin/
+  file:
+    path: /run/powerdns-admin
+    state: directory
+    mode: '0755'
+    owner: pdns
+    group: pdns
+
+- name: Make sure powerdns admin is running
+  systemd:
+    state: started
+    name: powerdns-admin
+
+- name: Make sure powerdns admin is enabled
+  systemd:
+    enabled: yes
+    name: powerdns-admin

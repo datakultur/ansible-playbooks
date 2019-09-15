@@ -1,0 +1,8 @@
+---
+  sql_pdns_password: s9rGAFwpCv3a7q95
+  mysql_root_password: 33HSVTeQGWBE3cWW
+  mariadb_socket: /var/run/mysqld/mysqld.sock
+  pda_secret_key: vWARuwdNuXbJzAsBBvR3yCuVuDLyH5KV
+  pda_salt: hvTWbjNSssMjHG5y
+  pda_db_password: BvR3yCuVuDLyH5KV
+  pdns_api_key: Gmw37bQVR7b5LtGCtgFuLHNk

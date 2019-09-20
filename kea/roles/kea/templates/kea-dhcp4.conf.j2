@@ -1,0 +1,46 @@
+{
+  "Dhcp4": {
+      "control-socket": {
+          "socket-type": "unix",
+          "socket-name": "/tmp/kea-dhcp4-ctrl.sock"
+      },
+      "interfaces-config": {
+          "interfaces": [ "eth0" ],
+          "dhcp-socket-type": "udp"
+      },
+      "lease-database": {
+          "type": "mysql",
+          "user": "kea",
+          "password": "{{sql_kea_password}}",
+          "name": "kea"
+      },
+      "option-data": [
+          {
+             "name": "domain-name-servers",
+             "data": "{{domain_name_servers_v4}}"
+          },
+          {
+             "name": "domain-name",
+             "data": "{{domain_name}}"
+          },
+          {% if tftp_server_name_v4 is defined %}
+          {
+             "name": "tftp-server-name",
+             "data": "{{tftp_server_name_v4}}"
+          },
+          {% endif %}
+      ],
+      "valid-lifetime": 3600,
+      "renew-timer": 900,
+      "rebind-timer": 1800,
+      "expired-leases-processing": {
+          "reclaim-timer-wait-time": 10,
+          "flush-reclaimed-timer-wait-time": 25,
+          "hold-reclaimed-time": 3600,
+          "max-reclaim-leases": 100,
+          "max-reclaim-time": 250,
+          "unwarned-reclaim-cycles": 5
+      },
+      "subnet4": <?include "/etc/kea/subnet4.json"?>
+  }
+}

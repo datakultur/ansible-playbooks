@@ -1,0 +1,21 @@
+---
+- name: Create database for Kea
+  mysql_db:
+    name: kea
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: "{{ mariadb_socket }}"
+    state: present
+
+- name: Add user for Kea
+  mysql_user:
+    name: kea
+    password: "{{ kea_db_password }}"
+    priv: 'kea.*:ALL'
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: "{{ mariadb_socket }}"
+    state: present
+
+- name: Run kea-admin db-init mysql
+  command: "kea-admin db-init mysql  --host localhost --user kea --password {{ mysql_root_password }} --name kea"

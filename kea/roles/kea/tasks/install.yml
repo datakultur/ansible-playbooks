@@ -1,0 +1,27 @@
+---
+- name: Install required packages for Cloudsmith
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - apt-transport-https
+
+- name: Install ISC-Kea (Cloudsmith) repo key
+  apt_key:
+    url: https://dl.cloudsmith.io/public/isc/kea-1-6/cfg/gpg/gpg.0607E2621F1564A6.key
+    state: present
+
+- name: Add ISC-Kea (Cloudsmith) repo
+  apt_repository:
+    repo: deb https://dl.cloudsmith.io/public/isc/kea-1-6/deb/ubuntu bionic main
+    state: present
+    filename: isc-kea-1-6
+
+- name: Install isc-kea-dhcp and ddns
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - isc-kea-dhcp4-server
+    - isc-kea-dhcp6-server
+    - isc-kea-dhcp-ddns-server

@@ -1,0 +1,14 @@
+- name: dhcp4_restart
+  systemd:
+    name: isc-kea-dhcp4-server
+    state: restarted
+
+- name: dhcp6_restart
+  systemd:
+    name: isc-kea-dhcp6-server
+    state: restarted
+
+- name: kea_ddns_restart
+  systemd:
+    name: isc-kea-dhcp-ddns-server
+    state: restarted

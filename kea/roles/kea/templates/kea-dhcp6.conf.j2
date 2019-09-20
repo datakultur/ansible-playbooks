@@ -1,0 +1,40 @@
+{
+  "Dhcp6": {
+      "control-socket": {
+          "socket-type": "unix",
+          "socket-name": "/tmp/kea-dhcp6-ctrl.sock"
+      },
+      "interfaces-config": {
+          "interfaces": [ "eth0/{{ hostvars[inventory_hostname]['ansible_default_ipv6']['address'] }}" ]
+      },
+      "lease-database": {
+          "type": "mysql",
+          "user": "kea",
+          "password": "{{sql_kea_password}}",
+          "name": "kea"
+      },
+      "option-data": [
+          {
+             "name": "dns-servers",
+             "data": "{{domain_name_servers_v6}}"
+          },
+          {
+             "name": "domain-search",
+             "data": "{{domain_name}}"
+          }
+      ],
+      "renew-timer": 1000,
+      "rebind-timer": 2000,
+      "preferred-lifetime": 3000,
+      "valid-lifetime": 4000,
+      "expired-leases-processing": {
+          "reclaim-timer-wait-time": 10,
+          "flush-reclaimed-timer-wait-time": 25,
+          "hold-reclaimed-time": 3600,
+          "max-reclaim-leases": 100,
+          "max-reclaim-time": 250,
+          "unwarned-reclaim-cycles": 5
+      },
+      "subnet6": <?include "/etc/kea/subnet6.json"?>
+  }
+}

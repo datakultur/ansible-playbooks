@@ -1,0 +1,10 @@
+---
+- name: Remove anonymous users
+  mysql_user:
+    name: ''
+    host_all: true
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: "{{ mariadb_socket }}"
+    state: absent
+  tags: mariadb

@@ -1,0 +1,9 @@
+"hooks-libraries": [
+    {
+        "library": "/root/kea-hook-runscript/kea-hook-runscript.so",
+        "parameters": {
+            "script": "/root/test.py",
+            "wait": false
+        }
+    }
+],

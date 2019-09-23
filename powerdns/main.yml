@@ -4,6 +4,7 @@
     - mariadb
   vars_files:
     - variables.yml
+  become: true
 
 - hosts: master
   vars_files:
@@ -18,6 +19,8 @@
       local-ipv6: "{{ hostvars[inventory_hostname]['ansible_default_ipv6']['address'] }}"
       api: true
       api-key: "{{ pdns_api_key }}"
+      default-soa-name: "{{ pdns_default_soa_name }}"
+      default-soa-mail: "{{ pdns_default_soa_mail }}"
     pdns_backends:
       gmysql:
         host: localhost
@@ -37,9 +40,11 @@
     file:
       state: absent
       path: "/etc/powerdns/named.conf"
+  become: true
 
 - hosts: master
   roles:
     - powerdnsadmin
   vars_files:
     - variables.yml
+  become: true

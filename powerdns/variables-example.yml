@@ -6,3 +6,5 @@
   pda_salt: hvTWbjNSssMjHG5y
   pda_db_password: BvR3yCuVuDLyH5KV
   pdns_api_key: Gmw37bQVR7b5LtGCtgFuLHNk
+  pdns_default_soa_name: ns1.lan.sdok.no
+  pdns_default_soa_mail: hostmaster.sdok.no

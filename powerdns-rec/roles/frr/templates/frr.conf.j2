@@ -1,3 +1,4 @@
+{% set ip_address = ansible_default_ipv4.address + "/" + ansible_default_ipv4.netmask %}
 frr version 7.1
 frr defaults traditional
 hostname {{inventory_hostname}}
@@ -11,7 +12,7 @@ router ospf
 {% if loopback_ipv4_dns1 is defined  %}
  network {{ loopback_ipv4_dns1 }} area 0.0.0.0
 {% endif %}
- network {{ hostvars[inventory_hostname]['ansible_default_ipv4']['network'] }} area 0.0.0.0
+ network {{ ip_address | ipaddr('network/prefix') }} area 0.0.0.0
 !
 router ospf6
  ospf6 router-id {{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}

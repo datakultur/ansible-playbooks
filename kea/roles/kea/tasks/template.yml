@@ -3,25 +3,25 @@
   template:
     src: subnet4.json.j2
     dest: /etc/kea/subnet4.json
-  force: false
+    force: false
 
 - name: Create subnet6.json
   template:
     src: subnet6.json.j2
     dest: /etc/kea/subnet6.json
-  force: false
+    force: false
 
 - name: Create forward-ddns.json
   template:
     src: forward-ddns.json.j2
     dest: /etc/kea/forward-ddns.json
-  force: false
+    force: false
 
 - name: Create reverse-ddns.json
   template:
     src: reverse-ddns.json.j2
     dest: /etc/kea/reverse-ddns.json
-  force: false
+    force: false
 
 - name: Template kea-dhcp4.conf
   template:

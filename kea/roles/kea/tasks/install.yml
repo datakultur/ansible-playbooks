@@ -22,6 +22,7 @@
     name: "{{ packages }}"
   vars:
     packages:
+    - isc-kea-admin
     - isc-kea-dhcp4-server
     - isc-kea-dhcp6-server
     - isc-kea-dhcp-ddns-server

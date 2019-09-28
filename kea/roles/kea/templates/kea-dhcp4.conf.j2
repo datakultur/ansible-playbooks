@@ -11,7 +11,7 @@
       "lease-database": {
           "type": "mysql",
           "user": "kea",
-          "password": "{{sql_kea_password}}",
+          "password": "{{kea_db_password}}",
           "name": "kea"
       },
       "option-data": [
@@ -27,7 +27,7 @@
           {
              "name": "tftp-server-name",
              "data": "{{tftp_server_name_v4}}"
-          },
+          }
           {% endif %}
       ],
       "valid-lifetime": 3600,

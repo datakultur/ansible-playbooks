@@ -1,5 +1,5 @@
 ---
-  sql_kea_password: s9rGAFwpCv3a7q95
+  kea_db_password: s9rGAFwpCv3a7q95
   mysql_root_password: 33HSVTeQGWBE3cWW
   mariadb_socket: /var/run/mysqld/mysqld.sock
   domain_name_servers_v4: 213.184.213.10, 213.184.213.15

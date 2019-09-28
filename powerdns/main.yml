@@ -6,7 +6,7 @@
     - variables.yml
   become: true
 
-- hosts: master
+- hosts: all
   vars_files:
     - variables.yml
   roles:
@@ -21,6 +21,8 @@
       api-key: "{{ pdns_api_key }}"
       default-soa-name: "{{ pdns_default_soa_name }}"
       default-soa-mail: "{{ pdns_default_soa_mail }}"
+      superslave: true
+      allow-axfr-ips: "{{ pdns_allow_axfr_ips }}"
     pdns_backends:
       gmysql:
         host: localhost
@@ -42,7 +44,7 @@
       path: "/etc/powerdns/named.conf"
   become: true
 
-- hosts: master
+- hosts: all
   roles:
     - powerdnsadmin
   vars_files:

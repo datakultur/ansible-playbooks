@@ -17,5 +17,5 @@
     login_unix_socket: "{{ mariadb_socket }}"
     state: present
 
-- name: Run kea-admin db-init mysql
-  command: "kea-admin db-init mysql  --host localhost --user kea --password {{ mysql_root_password }} --name kea"
+    #- name: Run kea-admin db-init mysql
+    #  command: "kea-admin db-init mysql  --host localhost --user root --password {{ mysql_root_password }} --name kea"

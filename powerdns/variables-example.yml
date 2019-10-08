@@ -8,3 +8,4 @@
   pdns_api_key: Gmw37bQVR7b5LtGCtgFuLHNk
   pdns_default_soa_name: ns1.lan.sdok.no
   pdns_default_soa_mail: hostmaster.sdok.no
+  pdns_allow_axfr_ips: 127.0.0.1, ::1, 213.184.213.224/28, 2a0b:5102:0:242::/64

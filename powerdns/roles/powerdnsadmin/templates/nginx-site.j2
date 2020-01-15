@@ -22,7 +22,7 @@ server {
 
   location ~ ^/static/  {
     include  /etc/nginx/mime.types;
-    root /opt/web/powerdns-admin/app;
+    root /opt/web/powerdns-admin/powerdnsadmin;
 
     location ~*  \.(jpg|jpeg|png|gif)$ {
       expires 1d;

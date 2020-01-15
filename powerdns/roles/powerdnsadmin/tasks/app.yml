@@ -17,6 +17,7 @@
     - apt-transport-https
     - virtualenv
     - build-essential
+    - python-setuptools
 
 - name: Install gpg key for nodejs LTS
   apt_key:
@@ -57,16 +58,16 @@
 - name: Template config file
   template:
     src: config.py.j2
-    dest: /opt/web/powerdns-admin/config.py
+    dest: /opt/web/powerdns-admin/configs/production.py
 
 - name: Install requirements
   pip:
     requirements: /opt/web/powerdns-admin/requirements.txt
     virtualenv: /opt/web/powerdns-admin/flask
-    virtualenv_python: python3.6
+    virtualenv_python: python3
 
 - name: Run db upgrade
-  shell: FLASK_APP=app/__init__.py /opt/web/powerdns-admin/flask/bin/flask db upgrade
+  shell: FLASK_APP=powerdnsadmin/__init__.py FLASK_CONF=../configs/production.py /opt/web/powerdns-admin/flask/bin/flask db upgrade
   args:
     chdir: /opt/web/powerdns-admin/
 
@@ -76,7 +77,7 @@
     chdir: /opt/web/powerdns-admin/
 
 - name: Assets build
-  shell: FLASK_APP=app/__init__.py /opt/web/powerdns-admin/flask/bin/flask assets build
+  shell: FLASK_APP=powerdnsadmin/__init__.py /opt/web/powerdns-admin/flask/bin/flask assets build
   args:
     chdir: /opt/web/powerdns-admin/
 

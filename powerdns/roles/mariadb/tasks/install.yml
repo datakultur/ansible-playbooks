@@ -1,16 +1,4 @@
 ---
-- name: Install MariaDB repo key
-  apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: 177F4010FE56CA3336300305F1656F24C74CD1D8
-    state: present
-
-- name: Add MariaDB repo
-  apt_repository:
-    repo: deb [arch=amd64,arm64,ppc64el] http://ams2.mirrors.digitalocean.com/mariadb/repo/10.4/ubuntu bionic main
-    state: present
-    filename: mariadb
-
 - name: Install MariaDB
   apt:
     name: mariadb-server

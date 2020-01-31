@@ -1,0 +1,25 @@
+
+---
+- hosts: switches
+  gather_facts: no
+  tasks:
+   - name: "Validating that user actually wants to do this, cancel with Ctrl-c, then A"
+     pause:
+       prompt: "This command will be executed on all switches, are you sure you want to continue?"
+
+   - name: "Hold on...."
+     pause:
+       seconds: 5
+
+   - name: "REALLY SURE?"
+     pause:
+       prompt: "This command will be executed on all switches, are you sure you want to continue?"
+
+   - name: "Set or Reset password on HP Procurve Switches"
+     changed_when: False
+     local_action: command python3 {{playbook_dir}}/set_passwd_switches.py {{todo}} {{inventory_hostname}} {{switch_ip}} {{switch_password}}
+     register: output
+ 
+   - name: Verification Result Failure Status
+     fail: msg={{ output.stdout }}
+     when: output.stdout != "success"
